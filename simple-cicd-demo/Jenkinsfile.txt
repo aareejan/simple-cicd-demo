@@ -1,0 +1,33 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Checkout Code') {
+            steps {
+                echo 'Pulling code from GitHub'
+            }
+        }
+
+        stage('List Files') {
+            steps {
+                bat 'dir'
+                bat 'dir site'
+            }
+        }
+
+        stage('Show HTML Content') {
+            steps {
+                bat 'type site\\index.html'
+            }
+        }
+    }
+
+    post {
+        success {
+            echo 'Pipeline ran successfully ✅'
+        }
+        failure {
+            echo 'Pipeline failed ❌'
+        }
+    }
+}
